@@ -1,19 +1,23 @@
 
 import './App.css'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Pokemons from "./Pages/Pokemons.jsx";
-import Countries from "./Pages/Countries.jsx";
-import PokemonsProvider from './context/pokemonsContext.jsx';
-import CountriesProvider from './context/countriesContext.jsx';
+import Layout from './Pages/Client/layout';
+import Home from './Pages/Client/Home';
+
+
 
 function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/pokemons" element={<PokemonsProvider> <Pokemons /> </PokemonsProvider>} />
-        <Route path="/countries" element={<CountriesProvider> <Countries /> </CountriesProvider>} />
-      </Routes>
+        <Routes>
+            <Route path='/' element={<Layout/>}>
+                  <Route index  element={<Home/>} />
+                  
+            
+            </Route>
+
+        </Routes>
     </BrowserRouter>
   )
 }
