@@ -15,7 +15,15 @@ function useAuth() {
             setError(err.response.data.message); 
         }
     };
-
+      const register = async (formData)=>{
+        try {
+            const response = await axiosInstance.post('/auth/register', formData);
+            localStorage.setItem('token', response.data.token);
+            setUser(response.data.user)
+        } catch (err) {
+            setError(err.response.data.message); 
+        }
+      }
     const logout = async () => {
         localStorage.removeItem('token');
         setUser(null);
@@ -36,7 +44,7 @@ function useAuth() {
         getUser();
     }, []);
 
-    return { user, loading, error, login, logout };
+    return { user, loading, error, login,register, logout };
 }
 
 export default useAuth;

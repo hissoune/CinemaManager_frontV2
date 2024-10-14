@@ -2,12 +2,18 @@ import {  useState } from 'react';
 import { Link } from 'react-router-dom';
 import {  useAuthContext } from '../context/AuthContext';
 import Login from './auth/Login';
+import Register from './auth/Register';
 
 const Navbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const { user,logout } =useAuthContext() ;
+  const [isLogin, setIsLogin] = useState(true); 
 
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin); 
+  };
   return (
     <nav className="bg-white border-gray-200 dark:bg-[#181823] relative">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -31,7 +37,7 @@ const Navbar = () => {
           </button>
 
           {dropdownVisible && (
-            <div className="absolute right-0 z-50 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+            <div className="absolute right-0 z-50 mt-2 w-96 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
             {user?
             <>
               <div className="px-4 py-3">
@@ -47,7 +53,17 @@ const Navbar = () => {
               </ul>
               </>
               :
-              <div><Login/></div>
+              <div>
+                {isLogin? <Login/>: <Register/>}
+                <button
+                      type="button"
+                      onClick={toggleForm}
+                      className="mt-4  text-white md:dark:hover:text-[#C23C39] py-2 px-4 rounded-lg"
+                    >
+                      {isLogin ? "Switch to Register ?" : "Switch to Login ?"}
+                    </button>
+
+             </div>
               }
             </div>
           )}
