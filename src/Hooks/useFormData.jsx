@@ -1,41 +1,19 @@
-import { useContext, useState } from "react"
-import useCountries from "./useCountries"
-import { CountriesContext } from "../context/countriesContext"
-
+import { useState } from "react";
+import { useAuthContext } from "../context/AuthContext"; 
 
 export const useFormData = () => {
+    const [formData, setFormData] = useState({});
+    const { login } = useAuthContext(); 
 
-    const [formData, setFormData] = useState({})
-    const { countries, setCountries } = useContext(CountriesContext)
+    const onChange = (event) => {
+        const { name, value } = event.target;
+        setFormData(prevData => ({ ...prevData, [name]: value }));
+    };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        await login(formData); 
+    };
 
-    function onChange({ name, value }) {
-        setFormData({ ...formData, [name]: value })
-    }
-    function handlSubmit() {
-
-        const country = {
-            name: {
-                common: formData.arabName
-            },
-            flags: [
-                "https://flagcdn.com/w320/gi.png"
-            ],
-            translations: {
-                ara: {
-                    official: formData.arabName
-                },
-                bre: {
-                    official: formData.englishName
-                }
-            }
-        }
-
-
-        setCountries([...countries, country])
-
-
-    }
-    return { onChange, formData, handlSubmit }
-
-}
+    return { formData, onChange, handleSubmit };
+};

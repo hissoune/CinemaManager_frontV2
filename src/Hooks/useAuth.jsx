@@ -2,29 +2,41 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '../client/axiosInstance';
 
 function useAuth() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); 
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await axiosInstance.get('/auth/profile');
-        setUser(response.data); 
-      } catch (error) {
-        console.error('Failed to fetch user profile:', error);
-        setUser(null);
-      } finally {
-        setLoading(false); 
-      }
+    const login = async (formData) => {
+        try {
+            const response = await axiosInstance.post('/auth/login', formData);
+            localStorage.setItem('token', response.data.token);
+            setUser(response.data.user)
+        } catch (err) {
+            setError(err.response.data.message); 
+        }
     };
 
-    getUser();
-  }, []);
+    const logout = async () => {
+        localStorage.removeItem('token');
+        setUser(null);
+    };
 
-  return {
-    user,
-    loading,
-  };
+    useEffect(() => {
+        const getUser = async () => {
+            setLoading(true);
+            try {
+                const response = await axiosInstance.get('/auth/profile');
+                setUser(response.data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        getUser();
+    }, []);
+
+    return { user, loading, error, login, logout };
 }
 
 export default useAuth;
