@@ -38,7 +38,8 @@ export const useFormData = (formtype) => {
          break;
 
          case  'MovieUpdate':
-         console.log(formData);
+            await updateMovie(formData,formData.movieId)
+        
          break;
          case  'MovieCreate':
          console.log(formData);

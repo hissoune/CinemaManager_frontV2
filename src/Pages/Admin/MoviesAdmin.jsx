@@ -20,49 +20,49 @@ export default function MoviesAdmin() {
   if (moviesLoading) return <>loading . . .</>;
 
   return (
-    <div className="p-5 relative">
-    
-      <div className="my-10">
-        <h3 className="text-center text-4xl font-bold text-[#00b4d8]">Movies</h3>
-      </div>
+    <div className="p-5 ">
+      <div className="my-10"></div>
 
       <div className="flex justify-center mb-6">
         <button
           onClick={() => showPopup()}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
         >
           Add New Movie
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-6 p-6">
+      <div className="grid grid-cols-12 gap-6 p-6">
         {movies.map((movie, index) => (
           <div
             key={index}
-            className="card bg-gray-800 w-full p-6 overflow-hidden cursor-pointer transition-transform transform hover:scale-105 shadow-lg rounded-lg"
+            className="col-span-4 relative bg-cover bg-center bg-no-repeat w-full h-96 p-6 cursor-pointer transition-transform transform hover:scale-105 shadow-lg rounded-lg group"
+            style={{
+              backgroundImage: `url('${movie.image || '/2405f5d1220d45fef53df0bfe804e104.jpg'}')`,
+            }}
           >
-            <img
-              src="/2405f5d1220d45fef53df0bfe804e104.jpg"
-              alt="movie"
-              className="w-full max-h-96 mx-auto"
-            />
-            <div className="p-4">
-              <h2 className="text-lg text-white text-center font-bold">
-                {movie.name || `Movie Title ${index + 1}`}
-              </h2>
-              <p className="text-white">Short description of the movie goes here.</p>
-              <div className="mt-3 flex justify-between text-white px-4 py-2 rounded transition">
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-between p-4 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div>
+                <h2 className="text-lg text-white text-center font-bold">
+                  {movie.title || `Movie Title ${index + 1}`}
+                </h2>
+                <p className="text-white text-center">
+                  Short description of the movie goes here.
+                </p>
+              </div>
+
+              <div className="mt-3 flex justify-between items-center text-white px-4 py-2 rounded transition">
                 <div>
                   <img
                     src="/delete.png"
-                    className="w-10 overflow-hidden cursor-pointer transition-transform transform hover:scale-150"
+                    className="w-7 cursor-pointer transition-transform transform hover:scale-150"
                     alt="delete"
                   />
                 </div>
                 <div onClick={() => showPopup(movie)}>
                   <img
                     src="/maintenance.png"
-                    className="w-10 overflow-hidden cursor-pointer transition-transform transform hover:scale-150"
+                    className="w-10 cursor-pointer transition-transform transform hover:scale-150"
                     alt="update"
                   />
                 </div>
@@ -72,14 +72,13 @@ export default function MoviesAdmin() {
         ))}
       </div>
 
-      {shopop && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className=" rounded-lg shadow-lg p-6 w-1/3  ">
-            <MovieForm movie={selectedMovie} showme={hidePopup} />
-           
-          </div>
-        </div>
-      )}
+     {shopop && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
+   
+      <MovieForm movie={selectedMovie} showme={hidePopup} />
+   
+  </div>
+)}
     </div>
   );
 }
