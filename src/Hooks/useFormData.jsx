@@ -7,6 +7,7 @@ export const useFormData = (formtype) => {
     const { login ,register} = useAuthContext(); 
     const {updateMovie} = useMoviesAdmin()
 
+
     const onChange = (event) => {
         const { name, value, files } = event.target;
         if (files && files.length > 0) {
@@ -29,15 +30,18 @@ export const useFormData = (formtype) => {
 
     switch (formtype){
 
-         case formtype === 'login':
+         case 'login':
             await login(formData); 
          break;
-         case formtype === 'register' : 
+         case 'register' : 
                 await register(data); 
          break;
-         case  formtype === 'MoviUpdate':
-console.log('fuck ');
 
+         case  'MovieUpdate':
+         console.log(formData);
+         break;
+         case  'MovieCreate':
+         console.log(formData);
          break;
 
     }
@@ -45,5 +49,5 @@ console.log('fuck ');
        
     };
 
-    return { formData, onChange, handleSubmit };
+    return { formData, onChange, handleSubmit,setFormData };
 };
