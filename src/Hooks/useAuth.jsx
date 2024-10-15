@@ -7,18 +7,30 @@ function useAuth() {
     const [error, setError] = useState(null);
 
     const login = async (formData) => {
+
         try {
             const response = await axiosInstance.post('/auth/login', formData);
+
+
+       
             localStorage.setItem('token', response.data.token);
-            setUser(response.data.user)
+          
+         console.log(response.data.token);
+         
+            setUser(response.data.user);
+      
         } catch (err) {
-            setError(err.response.data.message); 
+          
+            setError(err.msg); 
+            
         }
     };
       const register = async (formData)=>{
         try {
             const response = await axiosInstance.post('/auth/register', formData);
+
             localStorage.setItem('token', response.data.token);
+
             setUser(response.data.user)
         } catch (err) {
             setError(err.response.data.message); 
