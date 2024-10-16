@@ -27,13 +27,13 @@ export default function useMoviesAdmin() {
     setMoviesLoading(true);
     try {
       const response = await axiosInstance.put('/movies/update/' + movieId, movieData);
-      console.log("Updated movie data:", response.data); 
 
-      setMovies((prevMovies) => 
-        prevMovies.map((movie) =>
-          movie._id === movieId ? { ...movie, ...movieData } : movie
-        )
-      );
+      setMovies((prevMovies) => {
+        const updatedMovies = prevMovies.map((movie) => 
+          movie._id === movieId ? { ...movie, ...response.data } : movie
+        );
+        return updatedMovies;
+      });
       
     } catch (error) {
       setError(error.message);
@@ -42,8 +42,28 @@ export default function useMoviesAdmin() {
     }
   };
 
+  const deleteMovie = async (movieId) => {
+    setMoviesLoading(true);
+    try {
+      await axiosInstance.delete('/movies/delete/' + movieId);
+      console.log(`Movie with ID ${movieId} deleted`);
+
+      setMovies((prevMovies) => {
+        const filteredMovies = prevMovies.filter((movie) => movie._id !== movieId);
+        console.log("Movies after deletion:", filteredMovies);
+        return filteredMovies;
+      });
+    } catch (error) {
+      setError(error.message);
+      console.error("Error deleting movie:", error.message);
+    } finally {
+      setMoviesLoading(false);
+    }
+  };
+
   return {
     updateMovie,
+    deleteMovie,
     movies,
     moviesLoading,
     error,

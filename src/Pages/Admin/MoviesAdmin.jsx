@@ -1,16 +1,25 @@
 import { useState } from "react";
 import useMoviesAdmin from "../../Hooks/useMoviesAdmin";
 import MovieForm from "../../Components/movie/movieForm";
+import ConfirmDelete from "../../Components/movie/ConfirmDelete";
 
 export default function MoviesAdmin() {
   const { movies, moviesLoading } = useMoviesAdmin();
   const [shopop, setShopop] = useState(false);
+  const [shopopdelete, setShopopdelete] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const showPopup = (movie = null) => {
     setSelectedMovie(movie);
     setShopop(true);
   };
+
+
+  const showPopupdelete = (movie = null) => {
+    setSelectedMovie(movie);
+    setShopopdelete(!shopopdelete);
+  };
+
 
   const hidePopup = () => {
     setShopop(false);
@@ -52,7 +61,7 @@ export default function MoviesAdmin() {
               </div>
 
               <div className="mt-3 flex justify-between items-center text-white px-4 py-2 rounded transition">
-                <div>
+                <div onClick={() => showPopupdelete(movie)}>
                   <img
                     src="/delete.png"
                     className="w-7 cursor-pointer transition-transform transform hover:scale-150"
@@ -76,6 +85,13 @@ export default function MoviesAdmin() {
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
    
       <MovieForm movie={selectedMovie} showme={hidePopup} />
+   
+  </div>
+)}
+ {shopopdelete && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
+   
+      <ConfirmDelete movie={selectedMovie} showme={showPopupdelete} />
    
   </div>
 )}
