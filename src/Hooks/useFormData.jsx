@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext"; 
 import useMoviesAdmin from "./useMoviesAdmin";
+import useRoomsAdmin from "./useRoomsAdmin";
 
 export const useFormData = (formtype) => {
     const [formData, setFormData] = useState({});
     const { login ,register} = useAuthContext(); 
-    const {updateMovie,createMovie} = useMoviesAdmin()
+    const {updateMovie,createMovie} = useMoviesAdmin();
+    const {createRoom,updateRoom} = useRoomsAdmin();
+
 
 
     const onChange = (event) => {
@@ -15,6 +18,8 @@ export const useFormData = (formtype) => {
         } else {
             setFormData(prevData => ({ ...prevData, [name]: value }));
         }
+     
+        
     };
 
     const handleSubmit = async (event) => {
@@ -27,6 +32,8 @@ export const useFormData = (formtype) => {
 
             data.append(key, formData[key]); 
         }
+      
+        
 
     switch (formtype){
 
@@ -42,8 +49,24 @@ export const useFormData = (formtype) => {
         
          break;
          case  'MovieCreate':
+           
+           
+            
             await createMovie(data);
          break;
+         case 'RoomCreate':
+            
+          await createRoom(formData)
+
+         break;
+         case 'RoomUpdate':
+           console.log(formData.location);
+           
+            
+            await updateRoom(formData.roomId,formData);
+
+         break;
+         
 
     }
 

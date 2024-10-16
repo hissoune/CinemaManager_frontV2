@@ -1,34 +1,39 @@
+import { useEffect } from "react";
 import { useFormData } from "../../Hooks/useFormData";
-import useMoviesAdmin from "../../Hooks/useMoviesAdmin";
-import useRoomsAdmin from "../../Hooks/useRoomsAdmin";
 
 // eslint-disable-next-line react/prop-types
-export default function SessionForm({ session = {}, showme }) {
-  const formtype = session && Object.keys(session).length > 0 ? 'SessionUpdate' : 'SessionCreate';
-  const { formData, onChange, handleSubmit } = useFormData(formtype);
-  const { movies, moviesLoading } = useMoviesAdmin();
-  const {rooms,loading}=useRoomsAdmin();
+export default function RoomForm({ room = {}, showme }) {
+  const formtype = room && Object.keys(room).length > 0 ? 'RoomUpdate' : 'RoomCreate';
+  const { formData, onChange, handleSubmit, setFormData } = useFormData(formtype);
 
+  useEffect(() => {
+    if (formtype === 'RoomUpdate' && room) {
+      setFormData({
+        roomId: room._id || '',
+        name: room.name || '',
+        capacity: room.capacity || '',
+        location: room.location || ''
+      });
+    } else {
+      setFormData({});
+    }
+  }, [room, formtype, setFormData]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      await handleSubmit(e);
+      await handleSubmit(e); 
       showme(); 
     } catch (error) {
       console.error("Error submitting form: ", error);
     }
   };
-if(moviesLoading || loading)return <div>loading . . .</div>
-
-
 
   return (
     <div className="dark:bg-gray-700 rounded-lg shadow-lg h-auto max-h-[90vh]">
       <div className="flex items-center justify-between p-2 border-b rounded-t dark:border-gray-600">
         <h3 className="font-semibold text-gray-900 dark:text-white">
-          {formtype === "SessionUpdate" ? "Update Session" : "Create Session"}
+          {formtype === "RoomUpdate" ? "Update room" : "Create room"}
         </h3>
         <button
           onClick={showme}
@@ -59,94 +64,65 @@ if(moviesLoading || loading)return <div>loading . . .</div>
           <div className="col-span-1">
             <input
               type="text"
-              name="sessionId"
+              name="roomId"
               className="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              value={session?._id || ''}
-              onChange={onChange}
+              value={formData?.roomId || ''}
+              onChange={onChange} 
             />
             <label
               htmlFor="name"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Price
+              Room name
             </label>
             <input
-              type="number"
-              name="price"
+              type="text"
+              name="name"
               id="name"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              placeholder="Session price"
+              placeholder="Room name"
               required
-              value={formData?.price || session?.price || ''}
+              value={formData?.name || ''} 
               onChange={onChange}
             />
           </div>
           <div className="col-span-1">
-           
             <label
-              htmlFor="dateTime"
+              htmlFor="capacity"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Date and the time
+              Room capacity
             </label>
             <input
-              type="datetime-local"
-              name="dateTime"
-              id="dateTime"
+              type="number"
+              name="capacity"
+              id="capacity"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              placeholder="Session Title"
+              placeholder="Room capacity"
               required
-              value={formData?.dateTime || session?.dateTime || ''}
+              value={formData?.capacity || ''}
               onChange={onChange}
             />
           </div>
-          <div className="col-span-1 sm:col-span-1">
-              <label
-                htmlFor="movie"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                movie
-              </label>
-              <select
-                id="movie"
-                value={formData?.movie || ''}
-                onChange={onChange}
-                name="movie"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              >
-                {movies.map((movie,index)=>(
-                <option  key={index} value={movie._id}>{movie.title}</option>
+          <div className="col-span-1">
+            <label
+              htmlFor="location"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Room location
+            </label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
+              placeholder="Room location"
+              required
+              value={formData?.location || ''} 
+              onChange={onChange}
+            />
+          </div>
 
-                ))
-             
-            }
-              
-              </select>
-            </div>
-            <div className="col-span-1 sm:col-span-1">
-              <label
-                htmlFor="rooms"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                rooms
-              </label>
-              <select
-                id="rooms"
-                value={formData?.room || ''}
-                onChange={onChange}
-                name="room"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              >
-                {rooms.map((room,index)=>(
-                <option  key={index} value={room._id}>{room.name}</option>
-
-                ))
-             
-            }
-              
-              </select>
-            </div>
-          
           <div className="col-span-1 py-7 flex justify-end">
             <button
               type="submit"

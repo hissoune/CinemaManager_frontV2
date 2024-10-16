@@ -11,7 +11,6 @@ export default function useMoviesAdmin() {
     try {
       const response = await axiosInstance.get('/movies');
       setMovies(response.data); 
-      console.log("Movies fetched:", response.data);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -50,7 +49,6 @@ export default function useMoviesAdmin() {
       
     } catch (error) {
       setError(error.message);
-      console.log(error);
       
     } finally {
       setMoviesLoading(false);
@@ -64,12 +62,10 @@ export default function useMoviesAdmin() {
 
       setMovies((prevMovies) => {
         const filteredMovies = prevMovies.filter((movie) => movie._id !== movieId);
-        console.log("Movies after deletion:", filteredMovies);
         return filteredMovies;
       });
     } catch (error) {
       setError(error.message);
-      console.error("Error deleting movie:", error.message);
     } finally {
       setMoviesLoading(false);
     }
