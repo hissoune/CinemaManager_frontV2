@@ -12,10 +12,6 @@ function Sidebar() {
 
   return (
     
-
-
-
-  
   <div className="py-4 fixed overflow-y-auto  bg-[#181823] h-screen p-6">
       <ul className="space-y-2 font-medium">
          <li>

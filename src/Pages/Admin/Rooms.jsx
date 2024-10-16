@@ -32,7 +32,7 @@ export default function Rooms() {
     
     <div className="p-5">
     <div className="flex justify-center mb-6">
-        <button
+        <button type="button"
           onClick={() => showPopup()}
           className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
         >

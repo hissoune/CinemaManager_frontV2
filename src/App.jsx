@@ -15,21 +15,20 @@ function App() {
 
   return (
     <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Layout/>}>
-                  <Route index  element={<Home/>} />
-                  
-            
-            </Route>
-            <Route path='/dashboard' element={<Dashboard/>}>
-            <Route index element={<Statistic/>} />
-              <Route path='/dashboard/movise-admin' element={<MoviesAdmin/>}/>     
-              <Route path='/dashboard/sessions-admin' element={<Sessions/>}/>     
-              <Route path='/dashboard/rooms-admin' element={<Rooms/>}/>     
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Home />} />
 
-            </Route>
 
-        </Routes>
+        </Route>
+        <Route path='/dashboard' element={<Dashboard />}>
+          <Route index element={<Statistic />} />
+          <Route path='/dashboard/movise-admin' element={<MoviesAdmin />} />
+          <Route path='/dashboard/sessions-admin' element={<Sessions />} />
+          <Route path='/dashboard/rooms-admin' element={<Rooms />} />
+        </Route>
+
+      </Routes>
     </BrowserRouter>
   )
 }

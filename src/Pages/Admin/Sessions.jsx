@@ -1,30 +1,45 @@
 import { useState } from "react";
 import useSessionsAdmin from "../../Hooks/useSessionsAdmin";
 import SessionForm from "../../Components/sessions/sessionForm";
+import ConfirmDelete from "../../Components/sessions/ConfirmDelete";
 
 export default function Sessions() {
   const { sessions, sessionsLoading } = useSessionsAdmin();
   const [shopop, setShopop] = useState(false);
-  // const [shopopdelete, setShopopdelete] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [shopopdelete, setShopopdelete] = useState(false);
+  const [selectedSession, setSelectedSession] = useState(null);
 
 
-  const showPopup = (movie = null) => {
-    setSelectedMovie(movie);
+  const showPopup = (session = null) => {
+    setSelectedSession(session);
     setShopop(true);
   };
   const hidePopup = () => {
     setShopop(false);
-    setSelectedMovie(null);
+    setSelectedSession(null);
+  };
+  const showPopupdelete = (session = null) => {
+
+    setSelectedSession(session);
+    setShopopdelete(!shopopdelete);
   };
 
 
   if (sessionsLoading) return <div>Loading...</div>;
 
   return (
+    <div className="p-5" >
+     <div className="flex justify-center mb-6">
+        <button
+          onClick={() => showPopup()}
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Add New Movie
+        </button>
+      </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-     <div>
-
+    
+    
      {sessions?.map((session) => (
         <div
           key={session._id}
@@ -43,7 +58,7 @@ export default function Sessions() {
             Time: {session.time}
           </p>
           <div className="mt-3 flex justify-between items-center text-white px-4 py-2 rounded transition">
-                <div >
+                <div onClick={() => showPopupdelete(session)}>
                   <img
                     src="/delete.png"
                     className="w-7 cursor-pointer transition-transform transform hover:scale-150"
@@ -61,14 +76,22 @@ export default function Sessions() {
         </div>
       ))}
       
-     </div>
+    
      {shopop && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
    
-      <SessionForm movie={selectedMovie} showme={hidePopup} />
+      <SessionForm session={selectedSession} showme={hidePopup} />
    
   </div>
 )}
+{shopopdelete && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
+   
+      <ConfirmDelete session={selectedSession} showme={showPopupdelete} />
+   
+  </div>
+)}
+    </div>
     </div>
   );
 }

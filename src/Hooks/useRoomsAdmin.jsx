@@ -2,34 +2,30 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../client/axiosInstance";
 
 export default function useRoomsAdmin() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [rooms, setRooms] = useState([]);
 
   const getRooms = async () => {
-    setLoading(true);
     try {
       const response = await axiosInstance.get("/rooms");
       setRooms(response.data);
     } catch (error) {
       setError(error);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   const createRoom = async (roomData) => {
-     
-    
-    setLoading(true);
-    try {
+         try {
       const response = await axiosInstance.post("/rooms/create", roomData);
       
       setRooms([...rooms, response.data]); 
+      console.log(response.data);
+      setLoading(true);
+      console.log("loading value : " + loading);
+      
     } catch (error) {
       setError(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -60,8 +56,10 @@ export default function useRoomsAdmin() {
   };
 
   useEffect(() => {
+    console.log("yep");
     getRooms();
-  }, []);
+    setLoading(false);
+  }, [loading]);
 
   return {
     rooms,

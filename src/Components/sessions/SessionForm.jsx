@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useFormData } from "../../Hooks/useFormData";
 import useMoviesAdmin from "../../Hooks/useMoviesAdmin";
 import useRoomsAdmin from "../../Hooks/useRoomsAdmin";
@@ -5,24 +6,36 @@ import useRoomsAdmin from "../../Hooks/useRoomsAdmin";
 // eslint-disable-next-line react/prop-types
 export default function SessionForm({ session = {}, showme }) {
   const formtype = session && Object.keys(session).length > 0 ? 'SessionUpdate' : 'SessionCreate';
-  const { formData, onChange, handleSubmit } = useFormData(formtype);
+  const { formData, onChange, handleSubmit, setFormData } = useFormData(formtype);
   const { movies, moviesLoading } = useMoviesAdmin();
-  const {rooms,loading}=useRoomsAdmin();
-
+  const { rooms, loading } = useRoomsAdmin();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     try {
       await handleSubmit(e);
-      showme(); 
+      showme();
     } catch (error) {
       console.error("Error submitting form: ", error);
     }
   };
-if(moviesLoading || loading)return <div>loading . . .</div>
 
+  useEffect(() => {
+    if (formtype === 'SessionUpdate' && session) {
+      setFormData({
+        sessionId: session._id || '',
+        price: session.price || '',
+        dateTime: session.dateTime ? new Date(session.dateTime).toISOString().slice(0, 16) : '',
+        room: session.room?._id || '',
+        movie: session.movie._id || '',
+      });
+    } else {
+      setFormData({}); 
+    }
+  }, [session, formtype, setFormData]);
 
+  if (moviesLoading || loading) return <div>Loading...</div>;
 
   return (
     <div className="dark:bg-gray-700 rounded-lg shadow-lg h-auto max-h-[90vh]">
@@ -58,96 +71,82 @@ if(moviesLoading || loading)return <div>loading . . .</div>
         <div className="grid gap-4 mb-4 grid-cols-2">
           <div className="col-span-1">
             <input
-              type="text"
+              type="hidden"
               name="sessionId"
-              className="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              value={session?._id || ''}
+              value={formData?.sessionId || ''}
               onChange={onChange}
             />
-            <label
-              htmlFor="name"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
+            <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Price
             </label>
             <input
               type="number"
               name="price"
-              id="name"
+              id="price"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
               placeholder="Session price"
               required
-              value={formData?.price || session?.price || ''}
+              value={formData?.price || ''}
               onChange={onChange}
             />
           </div>
+
           <div className="col-span-1">
-           
-            <label
-              htmlFor="dateTime"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Date and the time
+            <label htmlFor="dateTime" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Date and Time
             </label>
             <input
               type="datetime-local"
               name="dateTime"
               id="dateTime"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              placeholder="Session Title"
               required
-              value={formData?.dateTime || session?.dateTime || ''}
+              value={formData?.dateTime || ''}
               onChange={onChange}
             />
           </div>
-          <div className="col-span-1 sm:col-span-1">
-              <label
-                htmlFor="movie"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                movie
-              </label>
-              <select
-                id="movie"
-                value={formData?.movie || ''}
-                onChange={onChange}
-                name="movie"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              >
-                {movies.map((movie,index)=>(
-                <option  key={index} value={movie._id}>{movie.title}</option>
 
-                ))
-             
-            }
-              
-              </select>
-            </div>
-            <div className="col-span-1 sm:col-span-1">
-              <label
-                htmlFor="rooms"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                rooms
-              </label>
-              <select
-                id="rooms"
-                value={formData?.room || ''}
-                onChange={onChange}
-                name="room"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              >
-                {rooms.map((room,index)=>(
-                <option  key={index} value={room._id}>{room.name}</option>
+          <div className="col-span-1">
+            <label htmlFor="movie" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Movie
+            </label>
+            <select
+              id="movie"
+              name="movie"
+              value={formData?.movie || ''}
+              onChange={onChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
+            >
+              <option value="" disabled>{formtype === 'SessionCreate' ? 'Select a movie' : 'Loading movie...'}</option>
+              {movies.map((movie) => (
+                <option key={movie._id} value={movie._id}>
+                  {movie.title}
+                </option>
+              ))}
+            </select>
+          </div>
 
-                ))
-             
-            }
-              
-              </select>
-            </div>
-          
-          <div className="col-span-1 py-7 flex justify-end">
+          <div className="col-span-1">
+            <label htmlFor="rooms" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Room
+            </label>
+            <select
+              id="rooms"
+              name="room"
+              value={formData?.room || ''}
+              onChange={onChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
+            >
+              <option value="" disabled>{formtype === 'SessionCreate' ? 'Select a room' : 'Loading room...'}</option>
+              {rooms.map((room) => (
+                <option key={room._id} value={room._id}>
+                  {room.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="col-span-2 py-7 flex justify-end">
             <button
               type="submit"
               className="text-white block m-auto w-full bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"

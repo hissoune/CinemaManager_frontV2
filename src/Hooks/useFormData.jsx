@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext"; 
 import useMoviesAdmin from "./useMoviesAdmin";
 import useRoomsAdmin from "./useRoomsAdmin";
+import useSessionsAdmin from "./useSessionsAdmin";
 
 export const useFormData = (formtype) => {
     const [formData, setFormData] = useState({});
     const { login ,register} = useAuthContext(); 
     const {updateMovie,createMovie} = useMoviesAdmin();
     const {createRoom,updateRoom} = useRoomsAdmin();
+    const {updateSession,createSession} = useSessionsAdmin();
 
 
 
@@ -49,9 +51,6 @@ export const useFormData = (formtype) => {
         
          break;
          case  'MovieCreate':
-           
-           
-            
             await createMovie(data);
          break;
          case 'RoomCreate':
@@ -60,13 +59,18 @@ export const useFormData = (formtype) => {
 
          break;
          case 'RoomUpdate':
-           console.log(formData.location);
-           
-            
+  
             await updateRoom(formData.roomId,formData);
 
-         break;
-         
+            break;
+         case 'SessionUpdate':
+              await updateSession(formData.sessionId,formData)
+             
+             break;
+             case 'SessionCreate':
+             await createSession(formData);
+             break;
+            
 
     }
 
