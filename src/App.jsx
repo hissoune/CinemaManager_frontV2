@@ -6,6 +6,8 @@ import Home from './Pages/Client/Home';
 import Dashboard from './Pages/Admin/Dashboard';
 import MoviesAdmin from './Pages/Admin/MoviesAdmin';
 import Statistic from './Pages/Admin/Statistic';
+import Sessions from './Pages/Admin/Sessions';
+import Rooms from './Pages/Admin/Rooms';
 
 
 
@@ -22,6 +24,8 @@ function App() {
             <Route path='/dashboard' element={<Dashboard/>}>
             <Route index element={<Statistic/>} />
               <Route path='/dashboard/movise-admin' element={<MoviesAdmin/>}/>     
+              <Route path='/dashboard/sessions-admin' element={<Sessions/>}/>     
+              <Route path='/dashboard/rooms-admin' element={<Rooms/>}/>     
 
             </Route>
 

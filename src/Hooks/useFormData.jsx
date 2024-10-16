@@ -5,7 +5,7 @@ import useMoviesAdmin from "./useMoviesAdmin";
 export const useFormData = (formtype) => {
     const [formData, setFormData] = useState({});
     const { login ,register} = useAuthContext(); 
-    const {updateMovie} = useMoviesAdmin()
+    const {updateMovie,createMovie} = useMoviesAdmin()
 
 
     const onChange = (event) => {
@@ -42,7 +42,7 @@ export const useFormData = (formtype) => {
         
          break;
          case  'MovieCreate':
-         console.log(formData);
+            await createMovie(data);
          break;
 
     }

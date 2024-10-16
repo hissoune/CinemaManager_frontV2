@@ -41,12 +41,26 @@ export default function useMoviesAdmin() {
       setMoviesLoading(false);
     }
   };
+  const createMovie = async (movieData) => {
+    setMoviesLoading(true);
+    try {
+      const response = await axiosInstance.post('/movies/create', movieData);
+       
+      setMovies(response.data);
+      
+    } catch (error) {
+      setError(error.message);
+      console.log(error);
+      
+    } finally {
+      setMoviesLoading(false);
+    }
+  };
 
   const deleteMovie = async (movieId) => {
     setMoviesLoading(true);
     try {
       await axiosInstance.delete('/movies/delete/' + movieId);
-      console.log(`Movie with ID ${movieId} deleted`);
 
       setMovies((prevMovies) => {
         const filteredMovies = prevMovies.filter((movie) => movie._id !== movieId);
@@ -64,6 +78,7 @@ export default function useMoviesAdmin() {
   return {
     updateMovie,
     deleteMovie,
+    createMovie,
     movies,
     moviesLoading,
     error,

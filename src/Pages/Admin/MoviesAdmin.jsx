@@ -45,9 +45,9 @@ export default function MoviesAdmin() {
         {movies.map((movie, index) => (
           <div
             key={index}
-            className="col-span-4 relative bg-cover bg-center bg-no-repeat w-full h-96 p-6 cursor-pointer transition-transform transform hover:scale-105 shadow-lg rounded-lg group"
+            className="col-span-4 relative bg-cover bg-center bg-no-repeat w-full h-96 p-6 cursor-pointer transition-transform transform hover:scale-105 shadow-2xl rounded-lg group"
             style={{
-              backgroundImage: `url('${movie.image || '/2405f5d1220d45fef53df0bfe804e104.jpg'}')`,
+              backgroundImage: `url('${movie.posterImage || '/2405f5d1220d45fef53df0bfe804e104.jpg'}')`,
             }}
           >
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-between p-4 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100">
