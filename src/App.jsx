@@ -9,6 +9,7 @@ import Statistic from './Pages/Admin/Statistic';
 import Sessions from './Pages/Admin/Sessions';
 import Rooms from './Pages/Admin/Rooms';
 import Movies from './Pages/Client/movies/Movies';
+import MovieDetails from './Pages/Client/movies/MovieDetails';
 
 
 
@@ -20,7 +21,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/movies-client' element={<Movies/>} />
-
+          <Route path="/movies/:id" element={ <MovieDetails />  }/>
 
         </Route>
         <Route path='/dashboard' element={<Dashboard />}>
