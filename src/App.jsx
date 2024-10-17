@@ -8,6 +8,7 @@ import MoviesAdmin from './Pages/Admin/MoviesAdmin';
 import Statistic from './Pages/Admin/Statistic';
 import Sessions from './Pages/Admin/Sessions';
 import Rooms from './Pages/Admin/Rooms';
+import Movies from './Pages/Client/movies/Movies';
 
 
 
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='/movies-client' element={<Movies/>} />
 
 
         </Route>
