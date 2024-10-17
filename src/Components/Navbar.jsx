@@ -48,7 +48,7 @@ const Navbar = () => {
                       :
                       <></>
                     }
-                      <li><Link to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Details</Link></li>
+                      <li><Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</Link></li>
                       <li><button onClick={() => logout()} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white w-full"><img className='w-20 h-15' src="/logout.png" alt="logout" /></button></li>
                     </ul>
                   </>

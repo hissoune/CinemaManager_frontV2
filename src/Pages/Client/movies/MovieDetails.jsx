@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import useSessionsClient from "../../../Hooks/useSessionsClient";
 import Seats from "../../../Components/sessions/seats";
+import Favorites from "../../../Components/auth/Favorites";
 
 export default function MovieDetails() {
   const location = useLocation();
@@ -34,6 +35,7 @@ export default function MovieDetails() {
         <p className="text-white mt-4">{movie.description}</p>
         <p className="text-white mt-4">Rating: {movie.rating}/10</p>
         <p className="text-white mt-4">Genres: {movie.genre.join(", ")}</p>
+        <div><Favorites movie={movie}/></div>
       </div>
 
       <div className="p-10 bg-gray-900 min-h-screen text-white">

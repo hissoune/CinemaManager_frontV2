@@ -6,7 +6,7 @@ import useSessionsAdmin from "./useSessionsAdmin";
 
 export const useFormData = (formtype) => {
     const [formData, setFormData] = useState({});
-    const { login ,register} = useAuthContext(); 
+    const { login ,register,updateUser} = useAuthContext(); 
     const {updateMovie,createMovie} = useMoviesAdmin();
     const {createRoom,updateRoom} = useRoomsAdmin();
     const {updateSession,createSession} = useSessionsAdmin();
@@ -45,6 +45,9 @@ export const useFormData = (formtype) => {
          case 'register' : 
                 await register(data); 
          break;
+         case 'updateProfile':
+          await updateUser(data)
+         break;
 
          case  'MovieUpdate':
             await updateMovie(formData,formData.movieId)
@@ -70,6 +73,7 @@ export const useFormData = (formtype) => {
              case 'SessionCreate':
              await createSession(formData);
              break;
+             
             
 
     }

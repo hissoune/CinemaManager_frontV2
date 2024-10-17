@@ -10,6 +10,7 @@ import Sessions from './Pages/Admin/Sessions';
 import Rooms from './Pages/Admin/Rooms';
 import Movies from './Pages/Client/movies/Movies';
 import MovieDetails from './Pages/Client/movies/MovieDetails';
+import Profile from './Pages/Profile';
 
 
 
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='/profile' element={<Profile/>} />
           <Route path='/movies-client' element={<Movies/>} />
           <Route path="/movies/:id" element={ <MovieDetails />  }/>
 

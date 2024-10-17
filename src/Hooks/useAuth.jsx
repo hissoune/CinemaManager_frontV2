@@ -35,7 +35,27 @@ function useAuth() {
         } catch (err) {
             setError(err.response.data.message); 
         }
-      }
+      };
+
+      const updateUser = async (formData) => {
+        try {
+            const response = await axiosInstance.put('/auth/profile', formData);
+            setUser(response.data); 
+            
+        } catch (err) {
+            setError(err.response?.data?.message || err.message);
+        }
+    };
+   const favorites = async (movieId)=>{
+    
+    try {
+    
+        const response = await axiosInstance.put('/auth/profile/favorites/'+movieId);
+        setUser(response.data); 
+    } catch (err) {
+        setError(err.response?.data?.message || err.message);
+    }
+   }
     const logout = async () => {
         localStorage.removeItem('token');
         setUser(null);
@@ -56,7 +76,7 @@ function useAuth() {
         getUser();
     }, []);
 
-    return { user, loading, error, login,register, logout };
+    return { user, loading, error, login,register,updateUser,favorites,logout };
 }
 
 export default useAuth;

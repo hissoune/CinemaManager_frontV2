@@ -5,10 +5,10 @@ export const AuthContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export default function AuthProvider({ children }) {
-  const { user, loading ,login,register,logout} = useAuth(); 
+  const { user, loading ,login,register,updateUser,favorites,logout} = useAuth(); 
 
   return (
-    <AuthContext.Provider value={{ user, loading ,login,register,logout}}>
+    <AuthContext.Provider value={{ user, loading ,login,register,updateUser,favorites,logout}}>
       {children}
     </AuthContext.Provider>
   );
