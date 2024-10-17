@@ -137,8 +137,24 @@ export default function MovieForm({ movie = {}, showme }) {
               </label>
               <input
                 type="file"
-                name="posterImage"
+                name="imageUrl"
                 id="posterImage"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
+                onChange={onChange}
+              />
+            </div>
+            <div className="col-span-2 sm:col-span-1">
+              <label
+                htmlFor="posterImage"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Image
+              </label>
+              <input
+                type="file"
+                name="videoUrl"
+                id="posterImage"
+                accept="video"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
                 onChange={onChange}
               />

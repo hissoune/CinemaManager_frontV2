@@ -50,6 +50,7 @@ export default function MoviesAdmin() {
               backgroundImage: `url('${movie.posterImage || '/2405f5d1220d45fef53df0bfe804e104.jpg'}')`,
             }}
           >
+          
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-between p-4 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <div>
                 <h2 className="text-lg text-white text-center font-bold">
