@@ -3,7 +3,7 @@ import Navbar from "../../Components/Navbar";
 
 function Layout() {
   return (
-    <div className="bg-[#181823]">
+    <div className="bg-[#181823] ">
       <div>
          <Navbar />
       </div>

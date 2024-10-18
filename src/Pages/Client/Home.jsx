@@ -8,13 +8,13 @@ function Home() {
        
 
         
-           <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: 'url(/public/cinema-movie-night-3d-vector-clapper-board-director-s-megaphone-ticket-3d-glasses-movie-tape_606402-430.jpg)' }}>
-  <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
-    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-wide uppercase">
-      Experience the Magic of Cinema
-    </h1>
-  </div>
-</div>
+                <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: 'url(/public/cinema-movie-night-3d-vector-clapper-board-director-s-megaphone-ticket-3d-glasses-movie-tape_606402-430.jpg)' }}>
+        <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-wide uppercase">
+            Experience the Magic of Cinema
+          </h1>
+        </div>
+      </div>
 
 
         
