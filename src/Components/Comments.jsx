@@ -1,49 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useComments from "../Hooks/useComments";
+import { useFormData } from "../Hooks/useFormData";
 
-export default function Comments() {
-    const [comments, setComments] = useState([
-        {
-          id: 1,
-          name: 'Michael Gough',
-          date: 'Feb. 8, 2022',
-          avatar: 'https://flowbite.com/docs/images/people/profile-picture-2.jpg',
-          text: 'Very straight-to-point article. Really worth time reading. Thank you! But tools are just the instruments for the UX designers.',
-        },
-        {
-          id: 2,
-          name: 'Jese Leos',
-          date: 'Feb. 12, 2022',
-          avatar: 'https://flowbite.com/docs/images/people/profile-picture-5.jpg',
-          text: 'Much appreciated! Glad you liked it ☺️',
-        },
-        {
-          id: 3,
-          name: 'Bonnie Green',
-          date: 'Mar. 12, 2022',
-          avatar: 'https://flowbite.com/docs/images/people/profile-picture-3.jpg',
-          text: 'The article covers the essentials, challenges, myths and stages the UX designer should consider while creating the design strategy.',
-        },
-      ]);
+export default function Comments({movieId}) {
+    const { comments, commentsLoading, error, getComments } = useComments();
+    const { formData, onChange, handleSubmit,setFormData } = useFormData('comment');
+
+    useEffect(() => {
+      if (movieId) {
+        getComments(movieId);
+        setFormData((prevData) => ({
+            movieId: movieId, 
+                ...prevData,
+               
+            })); 
+      }
+    }, [movieId,setFormData]);
+
+   
     
-      const [newComment, setNewComment] = useState('');
-    
-      const handleCommentSubmit = (e) => {
+      const handleCommentSubmit =async (e) => {
         e.preventDefault();
-        if (newComment.trim() === '') return;
-    
-        const newCommentObj = {
-          id: comments.length + 1,
-          name: 'Anonymous User',
-          date: new Date().toLocaleDateString(),
-          avatar: 'https://flowbite.com/docs/images/people/profile-picture-4.jpg',
-          text: newComment,
-        };
-        setComments([...comments, newCommentObj]);
-        setNewComment('');
-      };
-    
+       
+             handleSubmit(e);
+    };
+    if (commentsLoading) {
+        return <div>loading . . .</div>
+        
+    }
+    if(error) return <div>{error.msg}</div>
       return (
-        <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased ">
+        <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased  h-full ">
           <div className="max-w-2xl mx-auto px-4">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Comments ({comments.length})</h2>
@@ -51,13 +38,15 @@ export default function Comments() {
     
             <form onSubmit={handleCommentSubmit} className="mb-6">
               <div className="py-2 px-4 mb-4 bg-white rounded-lg border  dark:bg-gray-800 dark:border-gray-700">
+                <input type="text"hidden  name="movieId" value={formData?.movieId || movieId} onChange={onChange} />
                 <textarea
                   id="comment"
                   rows="6"
+                  name="content"
                   className="w-full text-sm text-gray-900 border-0 outline-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                   placeholder="Write a comment..."
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
+                  value={formData?.content|| ''}
+                  onChange={onChange}
                   required
                 ></textarea>
               </div>
@@ -74,8 +63,8 @@ export default function Comments() {
                 <footer className="flex justify-between items-center mb-2">
                   <div className="flex items-center">
                     <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                      <img className="mr-2 w-6 h-6 rounded-full" src={comment.avatar} alt={comment.name} />
-                      {comment.name}
+                      <img className="mr-2 w-6 h-6 rounded-full" src={comment.user.image} alt={comment.user.name} />
+                      {comment.user.name}}
                     </p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       <time pubdate>{comment.date}</time>
@@ -91,7 +80,7 @@ export default function Comments() {
                     <span className="sr-only">Comment settings</span>
                   </button>
                 </footer>
-                <p className="text-gray-500 dark:text-gray-400">{comment.text}</p>
+                <p className="text-gray-500 dark:text-gray-400">{comment.content}</p>
                 <div className="flex items-center mt-4 space-x-4">
                   <button type="button" className="text-sm text-gray-500 dark:text-gray-400 hover:underline">
                     Reply

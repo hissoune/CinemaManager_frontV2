@@ -148,7 +148,7 @@ export default function MovieForm({ movie = {}, showme }) {
                 htmlFor="posterImage"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Image
+                Video
               </label>
               <input
                 type="file"

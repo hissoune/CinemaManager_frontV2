@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../client/axiosInstance';
+import { Navigate } from 'react-router-dom';
 
 function useAuth() {
     const [user, setUser] = useState(null);
@@ -59,6 +60,7 @@ function useAuth() {
     const logout = async () => {
         localStorage.removeItem('token');
         setUser(null);
+        <Navigate to={'/'}/>
     };
 
     useEffect(() => {

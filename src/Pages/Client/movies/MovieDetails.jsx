@@ -117,29 +117,31 @@ export default function MovieDetails() {
         )}
       </div>
       <div className="mt-8 grid grid-cols-12 gap-4">
-          <div className="col-span-6 p-6">
-            <h2 className="text-3xl text-center text-white font-bold mb-4">Watch the Trailer</h2>
-            <video controls className="w-full h-auto">
-              <source src={movie.videoUrl} type="video/mp4" />
-            </video>
-          </div>
-          <div className="col-span-6 p-6">
-            <div className="max-h-[400px] h-full shadow-slate-200 shadow-sm overflow-hidden my-12 relative">
-              <div className="overflow-auto h-full">
-                <Comments />
-              </div>
-              <style >{`
-                .overflow-auto::-webkit-scrollbar {
-                  display: none;
-                }
-                .overflow-auto {
-                  -ms-overflow-style: none;
-                  scrollbar-width: none;
-                }
-              `}</style>
-            </div>
-          </div>
+  <div className="col-span-6 p-6">
+    <h2 className="text-3xl text-center text-white font-bold mb-4">Watch the Trailer</h2>
+    <video controls className="w-full h-full max-h-[500px] border-1">
+      <source src={movie.videoUrl} type="video/mp4" />
+    </video>
+  </div>
+  
+  <div className="col-span-6 p-6">
+    <div className="max-h-[500px] h-full shadow-slate-200 shadow-sm overflow-hidden my-12 relative flex flex-col">
+      <div className="overflow-auto h-full">
+        <Comments movieId={movie._id} />
       </div>
+      <style>{`
+        .overflow-auto::-webkit-scrollbar {
+          display: none;
+        }
+        .overflow-auto {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+    </div>
+  </div>
+</div>
+
 
      
       {isPopupOpen && (
