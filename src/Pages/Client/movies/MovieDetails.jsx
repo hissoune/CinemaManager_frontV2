@@ -1,11 +1,13 @@
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { useLocation} from "react-router-dom";
 import Favorites from "../../../Components/auth/Favorites";
 import RatingStars from "../../../Components/movie/RatingStars";
 import Comments from "../../../Components/Comments";
+import useMoviesClient from "../../../Hooks/useMoviesClient";
 
 export default function MovieDetails() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { movies, movisLoading, error,getRelatedMovies } = useMoviesClient();
 
   const location = useLocation();
   const { movie } = location.state || {}; 
@@ -13,14 +15,20 @@ export default function MovieDetails() {
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
   };
+  useEffect(()=>{
+    getRelatedMovies(movie._id);
+    
+  },[])
 
+  if (movisLoading ) return <div>Loading movies...</div>;
 
+  if (error) return <div>Error fetching movies: {error}</div>;
   
 
   if (!movie) return <div>No movie data found</div>;
 
   return (
-    <div className="px-20">
+    <div className="p-20">
        <div className="relative bg-center bg-cover bg-no-repeat h-80 flex flex-col justify-center items-centerx " 
         
         style={{
@@ -137,16 +145,16 @@ export default function MovieDetails() {
           <div><h3 className="text-center text-red-600">No sessions available for this movie.</h3></div>
         )}
       </div> */}
-      <div className="mt-8 grid grid-cols-12 gap-4">
-  <div className="col-span-6 p-6">
-    <h2 className="text-3xl text-center text-white font-bold mb-4">Watch the Trailer</h2>
-    <video controls className="w-full h-full max-h-[500px] border-1">
-      <source src={movie.videoUrl} type="video/mp4" />
+      <div className="my-20 grid grid-cols-12 gap-4 ">
+  <div className="col-span-12 p-6">
+    <h2 className="text-3xl text-center text-white font-bold mb-4">Watch here</h2>
+    <video controls className="w-full  max-h-[500px] border-1">
+      <source src={movie.videoUrl} type="video/mp4" className="w-full" />
     </video>
   </div>
   
   <div className="col-span-6 p-6">
-    <div className="max-h-[500px] h-full shadow-slate-200 shadow-sm overflow-hidden my-12 relative flex flex-col">
+    <div className="max-h-[500px] h-full  overflow-hidden my-12 relative flex flex-col">
       <div className="overflow-auto h-full">
         <Comments movieId={movie._id} />
       </div>
@@ -161,6 +169,46 @@ export default function MovieDetails() {
       `}</style>
     </div>
   </div>
+  <div className="col-span-6 p-6">
+  <div className="max-h-[500px] h-full  shadow-sm overflow-auto my-12 relative flex flex-col">
+    <h2 className="text-lg lg:text-2xl text-center my-4 font-bold text-gray-900 dark:text-white">Related</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {movies?.map((movie, index) => (
+        <div
+          key={index}
+          className="relative bg-cover bg-center bg-no-repeat w-full h-96 p-6 cursor-pointer transition-transform transform hover:scale-105 shadow-2xl rounded-lg group"
+          style={{
+            backgroundImage: `url('${movie.posterImage || '/2405f5d1220d45fef53df0bfe804e104.jpg'}')`,
+          }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-between p-4 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div>
+              <h2 className="text-lg text-white text-center font-bold">
+                {movie.title || `Movie Title ${index + 1}`}
+              </h2>
+              <p className="text-white text-center">
+                {movie.description || "Short description of the movie goes here."}
+              </p>
+            </div>
+          </div>
+          <div>
+            <Favorites movie={movie} />
+          </div>
+        </div>
+      ))}
+    </div>
+    <style>{`
+      .overflow-auto::-webkit-scrollbar {
+        display: none;
+      }
+      .overflow-auto {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    `}</style>
+  </div>
+</div>
+
 </div>
 
 
