@@ -21,7 +21,7 @@ export default function Favorites({movie}) {
       }
   return (
     <div>
-       <div className="  m-4">
+       <div className=" ">
               <img
                 className="w-10 cursor-pointer transition-transform transform hover:scale-150"
                 src={user?.favorites?.includes(movie._id) ? "/heart (1).png" : "/heart.png"}
