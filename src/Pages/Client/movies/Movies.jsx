@@ -10,7 +10,6 @@ export default function Movies() {
   const handleMovieClick = (movie) => {
     navigate(`/movies/${movie._id}`, { state: { movie } });
   };
-console.log(movies);
 
   useEffect(()=>{
     getmovies();
