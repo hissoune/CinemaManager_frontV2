@@ -25,11 +25,30 @@ function useMoviesClient() {
         }
     };
 
+    const getRelatedMovies =async (moviId)=>{
+      setMovisLoading(true);
+        try {
+
+            const response = await axiosInstance.get('/relatedMovies/'+moviId);
+          console.log(response.data);
+          
+        setMovies(response.data.RelatedMovies
+        );
+
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setMovisLoading(false);
+        }
+
+    }
+
   
 
   return {
     movies,
     getmovies,
+    getRelatedMovies,
     movisLoading,
     error,
   }
