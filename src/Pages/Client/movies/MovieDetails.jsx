@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import useSessionsClient from "../../../Hooks/useSessionsClient";
-import Seats from "../../../Components/sessions/seats";
+import {  useState } from "react";
+import { useLocation} from "react-router-dom";
 import Favorites from "../../../Components/auth/Favorites";
 import RatingStars from "../../../Components/movie/RatingStars";
 import Comments from "../../../Components/Comments";
@@ -11,25 +9,13 @@ export default function MovieDetails() {
 
   const location = useLocation();
   const { movie } = location.state || {}; 
-  const { id: movieId } = useParams();
-  // const { sessions, loading, error, getSessionsByMovieId } = useSessionsClient();
-  const [isPopupOpen, setIsPopupOpen] = useState(false); 
-  const [selectedSession, setSelectedSession] = useState(null);
+  
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
   };
-  // const handleReserveClick = (session) => {
-    setSelectedSession(session); 
-    setIsPopupOpen(true); 
-  };
-  useEffect(() => {
-    if (movieId) {
-      getSessionsByMovieId(movieId); 
-    }
-  }, [movieId]);
 
-  if (loading) return <div>Loading sessions for this movie...</div>;
-  if (error) return <div>Error loading sessions: {error}</div>;
+
+  
 
   if (!movie) return <div>No movie data found</div>;
 
@@ -179,19 +165,7 @@ export default function MovieDetails() {
 
 
      
-      {isPopupOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-lg w-full">
-            <Seats session={selectedSession} /> 
-            <button 
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded" 
-              onClick={() => setIsPopupOpen(false)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 }
