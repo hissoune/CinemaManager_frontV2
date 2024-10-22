@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-[#181823] fixed z-20 w-full py-4">
+    <nav className="bg-white border-gray-200 dark:bg-[#363644] fixed z-20 w-full py-4">
       <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">Cine</span>
@@ -79,8 +79,8 @@ const Navbar = () => {
         </div>
 
         <div className={`items-center justify-between ${menuVisible ? 'flex' : 'hidden'} w-full md:flex md:w-auto md:order-1`}>
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-[#181823] md:dark:bg-[#181823] dark:border-gray-700">
-            <li><Link to="/movies-client" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:text-[#C23C39]">Movies</Link></li> {/* Increased font size */}
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border  rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:border-gray-700">
+            <li><Link to="/movies-client" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-[#C23C39] md:hover:bg-transparent  dark:text-white dark:hover:bg-[#C23C39] ">Movies</Link></li> {/* Increased font size */}
             <li><Link to="#" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:text-[#C23C39]">Sessions</Link></li> {/* Increased font size */}
             <li><Link to="/contact" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:text-[#C23C39]">Contact</Link></li> {/* Increased font size */}
           </ul>
