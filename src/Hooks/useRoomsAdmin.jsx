@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axiosInstance from "../client/axiosInstance";
 
 export default function useRoomsAdmin() {
@@ -7,12 +7,16 @@ export default function useRoomsAdmin() {
   const [rooms, setRooms] = useState([]);
 
   const getRooms = async () => {
+    setLoading(true)
     try {
       const response = await axiosInstance.get("/rooms");
       setRooms(response.data);
     } catch (error) {
       setError(error);
-    } 
+    } finally
+    {
+      setLoading(false)
+    }
   };
 
   const createRoom = async (roomData) => {
@@ -55,11 +59,7 @@ export default function useRoomsAdmin() {
     }
   };
 
-  useEffect(() => {
-    console.log("yep");
-    getRooms();
-    setLoading(false);
-  }, [loading]);
+
 
   return {
     rooms,
@@ -68,5 +68,6 @@ export default function useRoomsAdmin() {
     createRoom,
     updateRoom,
     deleteRoom,
+    getRooms
   };
 }

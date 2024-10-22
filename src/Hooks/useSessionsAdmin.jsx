@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axiosInstance from "../client/axiosInstance";
 
 export default function useSessionsAdmin() {
@@ -74,9 +74,7 @@ export default function useSessionsAdmin() {
         }
     };
 
-    useEffect(() => {
-        getSessions();
-    }, []);
+ 
 
     return {
         sessions,
@@ -85,5 +83,6 @@ export default function useSessionsAdmin() {
         createSession,
         updateSession,
         deleteSession,
+        getSessions,
     };
 }

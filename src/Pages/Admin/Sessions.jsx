@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSessionsAdmin from "../../Hooks/useSessionsAdmin";
 import SessionForm from "../../Components/sessions/sessionForm";
 import ConfirmDelete from "../../Components/sessions/ConfirmDelete";
 
 export default function Sessions() {
-  const { sessions, sessionsLoading } = useSessionsAdmin();
+  const { sessions, sessionsLoading,getSessions } = useSessionsAdmin();
   const [shopop, setShopop] = useState(false);
   const [shopopdelete, setShopopdelete] = useState(false);
   const [selectedSession, setSelectedSession] = useState(null);
 
 
+  useEffect(() => {
+    getSessions();
+}, []);
   const showPopup = (session = null) => {
     setSelectedSession(session);
     setShopop(true);

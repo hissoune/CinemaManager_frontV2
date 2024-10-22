@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import axiosInstance from '../client/axiosInstance';
 
 export default function useMoviesAdmin() {
@@ -18,9 +18,6 @@ export default function useMoviesAdmin() {
     }
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
 
   const updateMovie = async (movieData, movieId) => {
     setMoviesLoading(true);
@@ -75,6 +72,7 @@ export default function useMoviesAdmin() {
     updateMovie,
     deleteMovie,
     createMovie,
+    getMovies,
     movies,
     moviesLoading,
     error,

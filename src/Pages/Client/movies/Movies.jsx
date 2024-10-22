@@ -1,16 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import useMoviesClient from "../../../Hooks/useMoviesClient";
 import Favorites from "../../../Components/auth/Favorites";
+import { useEffect } from "react";
 
 export default function Movies() {
-  const { movies, movisLoading, error } = useMoviesClient();
+  const { movies, movisLoading, error,getmovies } = useMoviesClient();
   const navigate = useNavigate();
   
   const handleMovieClick = (movie) => {
     navigate(`/movies/${movie._id}`, { state: { movie } });
   };
+console.log(movies);
 
-  
+  useEffect(()=>{
+    getmovies();
+    
+  },[])
 
   if (movisLoading ) return <div>Loading movies...</div>;
 

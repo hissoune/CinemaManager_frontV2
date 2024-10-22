@@ -7,8 +7,9 @@ import useRoomsAdmin from "../../Hooks/useRoomsAdmin";
 export default function SessionForm({ session = {}, showme }) {
   const formtype = session && Object.keys(session).length > 0 ? 'SessionUpdate' : 'SessionCreate';
   const { formData, onChange, handleSubmit, setFormData } = useFormData(formtype);
-  const { movies, moviesLoading } = useMoviesAdmin();
-  const { rooms, loading } = useRoomsAdmin();
+  const { movies, moviesLoading,getMovies } = useMoviesAdmin();
+  const { rooms, loading ,getRooms} = useRoomsAdmin();
+ 
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +23,8 @@ export default function SessionForm({ session = {}, showme }) {
   };
 
   useEffect(() => {
+    getRooms();
+    getMovies();
     if (formtype === 'SessionUpdate' && session) {
       setFormData({
         sessionId: session._id || '',

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useMoviesAdmin from "../../Hooks/useMoviesAdmin";
 import MovieForm from "../../Components/movie/movieForm";
 import ConfirmDelete from "../../Components/movie/ConfirmDelete";
 
 export default function MoviesAdmin() {
-  const { movies, moviesLoading } = useMoviesAdmin();
+  const { movies, moviesLoading ,getMovies} = useMoviesAdmin();
   const [shopop, setShopop] = useState(false);
   const [shopopdelete, setShopopdelete] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -13,6 +13,9 @@ export default function MoviesAdmin() {
     setSelectedMovie(movie);
     setShopop(true);
   };
+  useEffect(() => {
+    getMovies();
+  }, []);
 
 
   const showPopupdelete = (movie = null) => {

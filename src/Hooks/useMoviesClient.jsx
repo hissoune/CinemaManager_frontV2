@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import axiosInstance from '../client/axiosInstance';
 
 function useMoviesClient() {
@@ -14,10 +14,9 @@ function useMoviesClient() {
         try {
 
             const response = await axiosInstance.get('/public/movies');
-      
-        
+        console.log(response);
+          
         setMovies(response.data);
-console.log(movies);
 
         } catch (error) {
             setError(error.message);
@@ -26,13 +25,11 @@ console.log(movies);
         }
     };
 
-      useEffect(()=>{
-        getmovies();
-        
-      },[])
+  
 
   return {
     movies,
+    getmovies,
     movisLoading,
     error,
   }

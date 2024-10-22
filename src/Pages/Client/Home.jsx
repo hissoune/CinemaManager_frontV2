@@ -1,4 +1,5 @@
 import MoviesSlider from "../../Components/slyders/MoveisSlider"
+import SessionsSlyder from "../../Components/slyders/SessionsSlyder"
 
 function Home() {
   return (
@@ -24,9 +25,9 @@ function Home() {
         <h1 className="text-center text-4xl md:text-5xl lg:text-6xl text-white font-serif font-bold mb-8">
           This Week
         </h1>
-        {/* <div className="w-full">
-          <SessionsSlayder />
-        </div> */}
+        <div className="w-full">
+          <SessionsSlyder />
+        </div>
       </div>
 
       <div className="h-auto bg-gray-800 flex flex-col items-center justify-center py-10">

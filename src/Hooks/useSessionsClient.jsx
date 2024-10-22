@@ -26,7 +26,7 @@ export default function useSessionsClient() {
     setLoading(true);
     setError(null); 
     try {
-      const response = await axiosInstance.get(`/sessions`); 
+      const response = await axiosInstance.get(`/public/sessions`); 
       setSessions(response.data);
     } catch (err) {
       setError(err.message || "Error fetching all sessions");

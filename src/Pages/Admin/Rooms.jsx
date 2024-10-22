@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useRoomsAdmin from "../../Hooks/useRoomsAdmin"
 import RoomForm from "../../Components/room/roomForm";
 import ConfirmDelete from "../../Components/room/ConfirmDelete";
 
 export default function Rooms() {
-    const {rooms,loading}=useRoomsAdmin();
+    const {rooms,loading,getRooms}=useRoomsAdmin();
     const [shopop, setShopop] = useState(false);
     const [selectedroom, setSselectedroom] = useState(null);
     const [shopopdelete, setShopopdelete] = useState(false);
@@ -16,7 +16,11 @@ export default function Rooms() {
         setShopop(false);
         setSselectedroom(null);
       };
-    
+      useEffect(() => {
+        console.log("yep");
+        getRooms();
+       
+      }, []);
       const showPopupdelete = (room = null) => {
 
         setSselectedroom(room);

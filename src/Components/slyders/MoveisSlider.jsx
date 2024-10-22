@@ -6,9 +6,14 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 
 import useMoviesClient from "../../Hooks/useMoviesClient";
+import { useEffect } from 'react';
 
 function MoviesSlider() {
-  const { movies, movisLoading } = useMoviesClient();
+  const { movies, movisLoading ,getmovies} = useMoviesClient();
+  useEffect(()=>{
+    getmovies();
+    
+  },[])
 
   if (movisLoading) return <>loading . . .</>;
 
