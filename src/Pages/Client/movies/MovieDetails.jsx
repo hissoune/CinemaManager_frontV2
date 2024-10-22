@@ -7,14 +7,18 @@ import RatingStars from "../../../Components/movie/RatingStars";
 import Comments from "../../../Components/Comments";
 
 export default function MovieDetails() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const location = useLocation();
   const { movie } = location.state || {}; 
   const { id: movieId } = useParams();
-  const { sessions, loading, error, getSessionsByMovieId } = useSessionsClient();
+  // const { sessions, loading, error, getSessionsByMovieId } = useSessionsClient();
   const [isPopupOpen, setIsPopupOpen] = useState(false); 
   const [selectedSession, setSelectedSession] = useState(null);
-
-  const handleReserveClick = (session) => {
+  const toggleDescription = () => {
+    setIsExpanded(!isExpanded);
+  };
+  // const handleReserveClick = (session) => {
     setSelectedSession(session); 
     setIsPopupOpen(true); 
   };
@@ -30,27 +34,58 @@ export default function MovieDetails() {
   if (!movie) return <div>No movie data found</div>;
 
   return (
-    <div className="p-20">
-      <div className=" bg-gray-900  text-white ">
-        <h1 className="text-4xl text-center font-bold mb-8">{movie.title}</h1>
-        <div className="">
-                  <img src={movie.posterImage} alt={movie.title} className="w-full h-96 object-cover" />
-
-        </div>
-        <div>
-        <p className="text-white mt-4">{movie.description}</p>
+    <div className="px-20">
+       <div className="relative bg-center bg-cover bg-no-repeat h-80 flex flex-col justify-center items-centerx " 
         
-        <p className="text-white mt-4 "> {movie.genre.join(", ")}</p>
-        <div className="flex justify-between">
-          <div><RatingStars movie={movie} /></div>
-          <div> <Favorites movie={movie}/></div>
-        </div>
-       
-        </div>
-       
-      </div>
+        style={{
+          backgroundImage: `url('${movie.posterImage || '/2405f5d1220d45fef53df0bfe804e104.jpg'}')`,
+          width:'100%'
+        }}
+        >
+            <div className="absolute inset-0  bg-black opacity-50"></div>
 
-      <div className="p-10 bg-gray-900  text-white">
+            <div className="relative z-10">
+            <h1 className="text-4xl text-center font-bold mb-8 text-white">{movie.title}</h1>
+          </div>
+
+          <div className="absolute left-48 top-10 border-2 bg-cover border-[#C23C39]  h-96 w-auto ">
+            <img src={`${movie.posterImage || '/2405f5d1220d45fef53df0bfe804e104.jpg'}`} alt="" className="h-full" />
+             <div className="flex justify-between mt-4">
+              <Favorites movie={movie} />
+              <div><RatingStars movie={movie} /></div>
+
+             </div>
+          </div>
+
+        </div>
+        <div className="text-white grid grid-cols-12 gap-4">
+  <div className="col-span-6">
+  </div>
+
+  <div className="col-span-6">
+  <p 
+      className={`text-white mt-4 w-full cursor-pointer ${isExpanded ? '' : 'line-clamp-4 overflow-hidden'}`} 
+      onClick={toggleDescription}
+    >
+      {movie.description}
+    </p>
+    <div className="text-white mt-4 flex flex-wrap gap-2">
+  {movie.genre.map((genre, index) => (
+    <span 
+      key={index} 
+      className="bg-gray-700 text-white px-2 py-1 rounded-full text-sm"
+    >
+      {genre}
+    </span>
+  ))}
+</div>
+
+    
+  </div>
+</div>
+
+
+      {/* <div className="p-10 bg-gray-900  text-white">
         <h1 className="text-4xl text-center font-bold mb-8">Sessions for this Movie</h1>
         {sessions.length > 0 ? (
           <div className="">
@@ -115,7 +150,7 @@ export default function MovieDetails() {
         ) : (
           <div><h3 className="text-center text-red-600">No sessions available for this movie.</h3></div>
         )}
-      </div>
+      </div> */}
       <div className="mt-8 grid grid-cols-12 gap-4">
   <div className="col-span-6 p-6">
     <h2 className="text-3xl text-center text-white font-bold mb-4">Watch the Trailer</h2>
