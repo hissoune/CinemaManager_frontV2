@@ -1,8 +1,40 @@
-# React + Vite
+# Cinema Manager - Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **Cinema Manager**! This application allows users to browse movies, book tickets, and manage their reservations with ease. The following guide explains the features, installation, and how to get started.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. **Browse Movies**
+- Explore a wide selection of movies, each with posters and detailed information.
+- Movies include descriptions, release dates, genres, and more.
+- View **showtimes** for each movie.
+
+### 2. **Book Tickets**
+- Select your preferred showtime for any movie.
+- Choose seats based on availability in the cinema.
+- Confirm your booking and receive a confirmation notification.
+
+### 3. **Manage Bookings**
+- View upcoming reservations from your account.
+- Cancel or modify bookings directly through the app.
+
+### 4. **User Authentication**
+- **Sign Up** for a new account to book tickets and manage reservations.
+- **Login** to access your account and previously made bookings.
+
+---
+
+## Installation
+
+To run this project locally, follow the steps below:
+
+### Prerequisites
+- Node.js (version 14.x or higher)
+- npm (version 6.x or higher) or Yarn
+- Git
+
+### Steps to Install
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/cinema-manager-frontend.git
+   cd cinema-manager-frontend
