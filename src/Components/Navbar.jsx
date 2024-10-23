@@ -80,9 +80,9 @@ const Navbar = () => {
 
         <div className={`items-center justify-between ${menuVisible ? 'flex' : 'hidden'} w-full md:flex md:w-auto md:order-1`}>
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border  rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:border-gray-700">
-            <li><Link to="/movies-client" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-[#C23C39] md:hover:bg-transparent  dark:text-white dark:hover:bg-[#C23C39] ">Movies</Link></li> {/* Increased font size */}
-            <li><Link to="#" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:text-[#C23C39]">Sessions</Link></li> {/* Increased font size */}
-            <li><Link to="/contact" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:text-[#C23C39]">Contact</Link></li> {/* Increased font size */}
+            <li><Link to="/movies-client" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-[#C23C39] md:hover:bg-transparent  dark:text-white dark:hover:bg-[#C23C39] ">Movies</Link></li> 
+            <li><Link to="/sessions-Client" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-[#C23C39] md:hover:bg-transparent  dark:text-white dark:hover:bg-[#C23C39]">Sessions</Link></li> 
+            <li><Link to="/contact" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:text-[#C23C39]">Contact</Link></li>
           </ul>
         </div>
       </div>
