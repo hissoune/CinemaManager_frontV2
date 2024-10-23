@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import RatingStars from "../../../Components/movie/RatingStars";
+import Seats from "../../../Components/sessions/Seats";
 
 export default function SessionDetails() {
   const location = useLocation();
@@ -27,15 +28,14 @@ export default function SessionDetails() {
                 src={`${session.movie.posterImage}`}
                 alt={`${session.movie.title} poster`}
               />
-              <div className="my-4 flex justify-center">
-                <RatingStars movie={session.movie} />
-              </div>
+            
             </div>
           </div>
         </div>
       </div>
 
-      <div className="text-center text-white font-bold  tex-3xl bg-slate-500 p-6">
+     <div className="grid grid-cols-12 gap-6 ">
+     <div className="text-center text-white font-bold  tex-3xl bg-slate-500 p-6 col-span-6">
         <p className="my-4">{new Date(session.dateTime).toLocaleString()}</p>
         <div>
             <button className="bg-[#C23C39] p-4 rounded-sm">
@@ -43,6 +43,12 @@ export default function SessionDetails() {
             </button>
         </div>
       </div>
+
+      <div className="col-span-6">
+      <Seats session={session}/>
+      </div>
+     </div>
+
     </div>
   );
 }
