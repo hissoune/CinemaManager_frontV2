@@ -1,13 +1,21 @@
 import { useEffect } from "react";
 import useSessionsClient from "../../../Hooks/useSessionsClient";
+import { useNavigate } from "react-router-dom";
 
 export default function SessionsClient() {
   const { sessions, loading, getAllSessions } = useSessionsClient();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllSessions();
   }, []);
 
+   const handelSessionClick = (session) =>
+   {
+    navigate(`/sessions-Client/${session._id}`, { state: { session } });
+  
+   }
+   
   if (loading) return <>loading . . .</>;
 
   return (
@@ -16,6 +24,7 @@ export default function SessionsClient() {
         {sessions.map((session, index) => (
           <div
             key={index}
+            onClick={()=>handelSessionClick(session)}
             className="col-span-12 sm:col-span-6 lg:col-span-3 relative bg-cover bg-center bg-no-repeat transition-transform transform hover:scale-105 shadow-2xl rounded-lg h-96"
             style={{
               backgroundImage: `url('${session.movie.posterImage || '/2405f5d1220d45fef53df0bfe804e104.jpg'}')`,
@@ -33,7 +42,7 @@ export default function SessionsClient() {
 
               <div className="text-center">
                 <p className="text-gray-300">Showtime:</p>
-                <p className="text-white font-bold text-lg">{new Date(session.showTime).toLocaleString()}</p>
+                <p className="text-white font-bold text-lg">{new Date(session.dateTime).toLocaleString()}</p>
               </div>
             </div>
           </div>
