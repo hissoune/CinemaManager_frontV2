@@ -170,7 +170,7 @@ export default function MovieDetails() {
     </div>
   </div>
   <div className="col-span-6 p-6">
-  <div className="max-h-[500px] h-full  shadow-sm overflow-auto my-12 relative flex flex-col">
+  <div className="max-h-[500px] h-full  shadow-sm  my-12 relative flex flex-col">
     <h2 className="text-lg lg:text-2xl text-center my-4 font-bold text-gray-900 dark:text-white">Related</h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {movies?.map((movie, index) => (
