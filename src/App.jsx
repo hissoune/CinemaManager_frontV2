@@ -15,6 +15,7 @@ import Contact from './Pages/Client/Contact';
 import NotFoundPage from './Pages/Client/NotFoundPage';
 import ProtectedRoutes from './helpers/protectedRoutes';
 import SessionsClient from './Pages/Client/sessions/SessionsClient';
+import SessionDetails from './Pages/Client/sessions/SessionDetails';
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='/movies-client' element={ <ProtectedRoutes><Movies/></ProtectedRoutes> } />
           <Route path="/movies/:id" element={ <ProtectedRoutes><MovieDetails /></ProtectedRoutes>  }/>
           <Route path="/sessions-Client" element={ <ProtectedRoutes><SessionsClient /></ProtectedRoutes>  }/>
+          <Route path="/sessions-Client/:id" element={ <ProtectedRoutes><SessionDetails /></ProtectedRoutes>  }/>
           <Route path="/contact" element={ <Contact />  }/>
           <Route path="/forbiden" element={ <NotFoundPage />  }/>
 
