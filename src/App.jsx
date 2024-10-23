@@ -14,6 +14,7 @@ import Profile from './Pages/Profile';
 import Contact from './Pages/Client/Contact';
 import NotFoundPage from './Pages/Client/NotFoundPage';
 import ProtectedRoutes from './helpers/protectedRoutes';
+import SessionsClient from './Pages/Client/sessions/SessionsClient';
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/profile' element={ <ProtectedRoutes><Profile/></ProtectedRoutes> } />
           <Route path='/movies-client' element={ <ProtectedRoutes><Movies/></ProtectedRoutes> } />
           <Route path="/movies/:id" element={ <ProtectedRoutes><MovieDetails /></ProtectedRoutes>  }/>
+          <Route path="/sessions-Client" element={ <ProtectedRoutes><SessionsClient /></ProtectedRoutes>  }/>
           <Route path="/contact" element={ <Contact />  }/>
           <Route path="/forbiden" element={ <NotFoundPage />  }/>
 
