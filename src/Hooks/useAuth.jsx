@@ -78,7 +78,18 @@ function useAuth() {
         getUser();
     }, []);
 
-    return { user, loading, error, login,register,updateUser,favorites,logout };
+    const requestPasswordReset = async (email) => {
+        try {
+            const response = await axiosInstance.post('/auth/reset-password', { email });
+            console.log(response.data.msg);
+            
+            return response.data.msg;
+        } catch (err) {
+            setError(err.response?.data?.message || err.message);
+        }
+    };
+
+    return { user, loading, error, login,register,updateUser,favorites,requestPasswordReset,logout };
 }
 
 export default useAuth;
