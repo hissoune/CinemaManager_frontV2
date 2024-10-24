@@ -1,16 +1,17 @@
 import { FaTrashAlt, FaCheckCircle } from "react-icons/fa"; // Icons for delete and confirm actions
 import useReservations from "../../../Hooks/useReservations";
 import { useEffect } from "react";
+import Loading from "../../../Components/Loading";
 
 const Reservations = () => {
-  const { reservations, loading, error, fetchReservations, confirmReservation } = useReservations();
+  const { reservations, loading, error, fetchReservations, confirmReservation,cancelReservation } = useReservations();
 
   useEffect(() => {
     fetchReservations();
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Loading/></div>;
   }
 
   if (error) {
@@ -21,9 +22,8 @@ const Reservations = () => {
     await confirmReservation(id);
   };
 
-  const handleCancel = (id) => {
-    console.log(`Cancel reservation ${id}`);
-    // Add your cancellation logic here
+  const handleCancel =async (id) => {
+    await cancelReservation(id)
   };
 
   return (
@@ -59,7 +59,7 @@ const Reservations = () => {
                 Confirm
               </button>
               <button
-                onClick={() => handleCancel(reservation.id)}
+                onClick={() => handleCancel(reservation._id)}
                 className="flex items-center px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded-lg"
               >
                 <FaTrashAlt className="mr-2" />
