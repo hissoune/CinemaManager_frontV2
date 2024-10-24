@@ -21,6 +21,21 @@ export default function useReservations() {
         
     };
     
+    const fetchReservationsAdmin = async () => {
+        setLoading(true);
+        try {
+            const response = await axiosInstance.get('/reservations/admin');
+             console.log(response.data);
+             
+            setReservations(response.data);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+            
+        };
+
    const createReservation = async (reservationData) => {
     try {
           const response = await axiosInstance.post('/reservations', {
@@ -77,6 +92,7 @@ export default function useReservations() {
     createReservation,
     fetchReservations,
     confirmReservation,
-    cancelReservation
+    cancelReservation,
+    fetchReservationsAdmin
   }
 }
