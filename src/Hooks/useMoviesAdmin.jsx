@@ -28,7 +28,7 @@ export default function useMoviesAdmin() {
         const updatedMovies = prevMovies.map((movie) => 
           movie._id === movieId ? { ...movie, ...response.data } : movie
         );
-        return updatedMovies;
+        return [...updatedMovies] ;
       });
       
     } catch (error) {
@@ -42,7 +42,7 @@ export default function useMoviesAdmin() {
     try {
       const response = await axiosInstance.post('/movies/create', movieData);
        
-      setMovies(response.data);
+      setMovies((prev) => [...prev, response.data]);
       
     } catch (error) {
       setError(error.message);
