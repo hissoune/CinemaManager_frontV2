@@ -19,10 +19,22 @@ export default function Seats({session}) {
     };
   return (
     <div>
-       <div className="p-10 max-w-4xl mx-auto  shadow-lg rounded-lg ">
+       <div className=" max-w-4xl mx-auto  shadow-lg rounded-lg ">
      
-      
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 my-4">
+       <div className="mt-6 flex justify-center">
+        <button
+          className={`w-full max-w-xs py-2 px-4 rounded-lg font-semibold transition-all text-white bg-[#C23C39] shadow-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none 
+            ${selectedSeatIndex === null ? 'opacity-50 cursor-not-allowed' : ''}`}
+          type="button"
+          onClick={handleReserveClick}
+          disabled={selectedSeatIndex === null}
+        >
+          {selectedSeatIndex === null ? 'Select a Seat' : 'Reserve Now'}
+        </button>
+      </div>
+
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 my-4 p-6">
         {session.seats.map((seat, index) => (
           <div
             key={index}
@@ -39,17 +51,7 @@ export default function Seats({session}) {
         ))}
       </div>
 
-      <div className="mt-6 flex justify-center">
-        <button
-          className={`w-full max-w-xs py-2 px-4 rounded-lg font-semibold transition-all text-white bg-[#C23C39] shadow-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none 
-            ${selectedSeatIndex === null ? 'opacity-50 cursor-not-allowed' : ''}`}
-          type="button"
-          onClick={handleReserveClick}
-          disabled={selectedSeatIndex === null}
-        >
-          {selectedSeatIndex === null ? 'Select a Seat' : 'Reserve Now'}
-        </button>
-      </div>
+      
     </div>
     </div>
   )
