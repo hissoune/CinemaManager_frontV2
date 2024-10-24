@@ -62,6 +62,7 @@ const Navbar = () => {
                     >
                       {isLogin ? "Switch to Register ?" : "Switch to Login ?"}
                     </button>
+                    <Link to={`/reset-password`}>Reset password </Link>
                   </div>
                 )}
               </div>
@@ -86,7 +87,7 @@ const Navbar = () => {
             <li><Link to="/reservations-Client" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-[#C23C39] md:hover:bg-transparent  dark:text-white dark:hover:bg-[#C23C39]">Reservations</Link></li> 
             :
             <></>}
-            
+
             <li><Link to="/contact" className="block py-2 px-3 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:text-[#C23C39]">Contact</Link></li>
           </ul>
         </div>
