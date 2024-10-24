@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-[#363644] fixed z-20 w-full py-4">
+    <nav className="  dark:bg-[#363644] fixed z-20 w-full ">
       <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">Cine</span>
