@@ -57,7 +57,10 @@ export default function useReservations() {
  const cancelReservation = async (reservationId) => {
     try {
          const response = await axiosInstance.delete(`/reservations/delete/${reservationId}`);
-         setReservations((prev) => [...prev, response.data]);
+         if (response) {
+                     setReservations((prev) => prev.filter((reservation) => reservation._id !== reservationId));
+
+         }
 
       
     } catch (error) {
