@@ -19,6 +19,7 @@ import SessionDetails from './Pages/Client/sessions/SessionDetails';
 import Reservations from './Pages/Client/reservations/Reservations';
 import RequestResetPass from './Pages/RequestResetPass';
 import ResetPassword from './Pages/ResetPassword';
+import ReservationsAdmin from './Pages/Admin/ReservationsAdmin';
 
 
 
@@ -47,6 +48,7 @@ function App() {
           <Route path='/dashboard/movise-admin' element={<ProtectedRoutes role='admin'><MoviesAdmin /></ProtectedRoutes>} />
           <Route path='/dashboard/sessions-admin' element={<ProtectedRoutes role='admin'><Sessions /></ProtectedRoutes>} />
           <Route path='/dashboard/rooms-admin' element={<ProtectedRoutes role='admin'><Rooms /></ProtectedRoutes>} />
+          <Route path='/dashboard/reservations-admin' element={<ProtectedRoutes role='admin'><ReservationsAdmin /></ProtectedRoutes>} />
         </Route>
 
       </Routes>
