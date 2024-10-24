@@ -60,8 +60,9 @@ export default function MovieDetails() {
         </div>
       </div>
 
-      <div className="text-white  lg:flex  lg:justify-center p-4">
-        <div className=" md:col-span-6">
+      <div className="text-white grid grid-cols-12 p-4">
+        <div className="lg:col-span-6 "></div>
+        <div className="col-span-12 lg:col-span-6 ">
           <p
             className={`text-white mt-4 w-full cursor-pointer ${isExpanded ? '' : 'line-clamp-4 overflow-hidden'}`} 
             onClick={toggleDescription}
