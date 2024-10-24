@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useFormData } from "../../Hooks/useFormData";
 
 // eslint-disable-next-line react/prop-types
-export default function MovieForm({ movie = {}, showme }) {
+export default function MovieForm({ movie = {}, showme, createMovie }) {
 
   const formtype = movie && Object.keys(movie).length > 0 ? 'MovieUpdate' : 'MovieCreate';
 
@@ -25,7 +25,7 @@ export default function MovieForm({ movie = {}, showme }) {
     e.preventDefault();
 
     try {
-      await handleSubmit(e);
+     await createMovie(formData);
       
       showme();
     } catch (error) {
