@@ -11,6 +11,7 @@ export default function useReservations() {
     setLoading(true);
     try {
         const response = await axiosInstance.get('/reservations');
+        
         setReservations(response.data);
     } catch (error) {
         setError(error.message);
@@ -36,18 +37,22 @@ export default function useReservations() {
        
     };
     
- const confirmReservation = async (reservationId) => {
-
-    try {
+    const confirmReservation = async (reservationId) => {
+        setLoading(true); 
+        try {
           const response = await axiosInstance.put(`/reservations/confirme/${reservationId}`);
-          setReservations((prev) => [...prev, response.data]);
+ 
+          setReservations((prev) => 
+            prev.map((reservation) => 
+              reservation._id === response.data._id ? response.data : reservation
+            )
+          );
         } catch (error) {
-        setError(error.message);
-    } finally {
-        setLoading(false);
-    }
-      
-    };
+          setError(error.response?.data.message || 'Error confirming reservation'); 
+        } finally {
+          setLoading(false); 
+        }
+      };
     
  const cancelReservation = async (reservationId) => {
     try {
