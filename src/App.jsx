@@ -18,6 +18,7 @@ import SessionsClient from './Pages/Client/sessions/SessionsClient';
 import SessionDetails from './Pages/Client/sessions/SessionDetails';
 import Reservations from './Pages/Client/reservations/Reservations';
 import RequestResetPass from './Pages/RequestResetPass';
+import ResetPassword from './Pages/ResetPassword';
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/profile' element={ <ProtectedRoutes><Profile/></ProtectedRoutes> } />
           <Route path='/reset-password' element={ <RequestResetPass/> } />
+          <Route path='/reset-password-fromemail/:token' element={ <ResetPassword/> } />
           <Route path='/movies-client' element={ <ProtectedRoutes><Movies/></ProtectedRoutes> } />
           <Route path="/movies/:id" element={ <ProtectedRoutes><MovieDetails /></ProtectedRoutes>  }/>
           <Route path="/sessions-Client" element={ <ProtectedRoutes><SessionsClient /></ProtectedRoutes>  }/>
