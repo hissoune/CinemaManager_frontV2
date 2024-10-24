@@ -1,10 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import useMoviesClient from "../../../Hooks/useMoviesClient";
 import Favorites from "../../../Components/auth/Favorites";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Movies() {
   const { movies, movisLoading, error, getmovies } = useMoviesClient();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("all");
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleGenreChange = (e) => {
+    setSelectedGenre(e.target.value);
+  };
+
+  const filteredMovies = movies.filter((movie) => {
+    const matchesSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesGenre = selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    return matchesSearch && matchesGenre;
+  });
   const navigate = useNavigate();
   
   const handleMovieClick = (movie) => {
@@ -21,8 +36,27 @@ export default function Movies() {
 
   return (
     <div className="h-full my-12 flex flex-col justify-center items-center px-4 md:px-8">
+       <header className="mb-10  w-full flex  justify-between p-10">
+        <input
+          type="text"
+          placeholder="Search movies..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="border rounded-md p-3 w-full sm:w-1/3 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        <select
+          value={selectedGenre}
+          onChange={handleGenreChange}
+          className="border rounded-md p-3 mt-4 sm:mt-0 w-full sm:w-1/4 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <option value="all">All Genres</option>
+          <option value="Action">Action</option>
+          <option value="Drama">Drama</option>
+          <option value="Comedy">Comedy</option>
+        </select>
+      </header>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full  ">
-        {movies?.map((movie, index) => (
+        {filteredMovies?.map((movie, index) => (
           <div
             key={index}
             onClick={() => handleMovieClick(movie)}
