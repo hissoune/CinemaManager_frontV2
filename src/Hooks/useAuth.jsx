@@ -89,7 +89,18 @@ function useAuth() {
         }
     };
 
-    return { user, loading, error, login,register,updateUser,favorites,requestPasswordReset,logout };
+    const resetPassword = async (token,newPass) => {
+        try {
+            const response = await axiosInstance.post('/auth/reset-password-fromemail/'+token, {newPassword:newPass });
+            
+            return response.data.msg;
+        } catch (err) {
+            setError(err.response?.data?.message || err.message);
+        }
+    };
+
+
+    return { user, loading, error, login,register,updateUser,favorites,requestPasswordReset,resetPassword,logout };
 }
 
 export default useAuth;
