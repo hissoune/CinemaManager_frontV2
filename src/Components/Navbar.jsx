@@ -28,9 +28,10 @@ const Navbar = () => {
               type="button"
               className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               onClick={() => setDropdownVisible(!dropdownVisible)}
+              aria-haspopup="true"
             >
               <span className="sr-only">Open user menu</span>
-              <img className="w-10 h-10 rounded-full" src={user ? user.image : '/login.png'} alt="user photo" /> 
+              <img className="w-10 h-10 rounded-full navbar-username-class" src={user ? user.image : '/login.png'} alt="user photo" /> 
             </button>
 
             {dropdownVisible && (
