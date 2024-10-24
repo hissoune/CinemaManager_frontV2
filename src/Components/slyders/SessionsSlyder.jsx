@@ -19,8 +19,8 @@ export default function SessionsSlyder() {
 
   return (
     <div>
-      <div className="w-full flex flex-col justify-center items-center bg-gradient-to-b from-gray-800 to-gray-900 overflow-hidden">
-        <div className="w-[80%] my-10 rounded-2xl bg-gray-800 p-4">
+      <div className="w-full flex flex-col justify-center items-center  overflow-hidden">
+        <div className="w-[80%] my-10 rounded-2xlp-4">
           <div className="relative w-full py-10">
             <Swiper
               modules={[Navigation, Autoplay]}
@@ -48,7 +48,7 @@ export default function SessionsSlyder() {
                 <SwiperSlide key={index}>
                   <div
           
-            className="col-span-4 relative bg-cover bg-center bg-no-repeat w-full h-96 p-6 cursor-pointer transition-transform transform hover:scale-105 shadow-2xl rounded-lg group"
+            className="relative bg-cover bg-center bg-no-repeat lg:my-6 h-[400px] sm:h-[450px] md:h-[500px] w-full sm:w-[300px] md:w-[350px] mx-auto cursor-pointer transition-transform transform hover:scale-105 shadow-2xl rounded-lg overflow-hidden"
             style={{
               backgroundImage: `url('${session.movie.posterImage || '/2405f5d1220d45fef53df0bfe804e104.jpg'}')`,
             }}
