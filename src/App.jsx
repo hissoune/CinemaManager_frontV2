@@ -17,6 +17,7 @@ import ProtectedRoutes from './helpers/protectedRoutes';
 import SessionsClient from './Pages/Client/sessions/SessionsClient';
 import SessionDetails from './Pages/Client/sessions/SessionDetails';
 import Reservations from './Pages/Client/reservations/Reservations';
+import RequestResetPass from './Pages/RequestResetPass';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/profile' element={ <ProtectedRoutes><Profile/></ProtectedRoutes> } />
+          <Route path='/reset-password' element={ <RequestResetPass/> } />
           <Route path='/movies-client' element={ <ProtectedRoutes><Movies/></ProtectedRoutes> } />
           <Route path="/movies/:id" element={ <ProtectedRoutes><MovieDetails /></ProtectedRoutes>  }/>
           <Route path="/sessions-Client" element={ <ProtectedRoutes><SessionsClient /></ProtectedRoutes>  }/>
