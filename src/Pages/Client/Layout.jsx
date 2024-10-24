@@ -8,7 +8,7 @@ function Layout() {
          <Navbar />
       </div>
      
-      <div className="pt-36 bg-[#181823]  h-auto">
+      <div className="pt-20 bg-[#181823]  h-auto">
         <Outlet />
       </div>
     </div>
