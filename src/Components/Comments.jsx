@@ -30,7 +30,7 @@ export default function Comments({movieId}) {
     }
     if(error) return <div>{error.msg}</div>
       return (
-        <section className="py-8 lg:py-16 antialiased  h-full ">
+        <section className="py-8 lg:py-16 antialiased  h-full">
           <div className="max-w-2xl mx-auto px-4">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Comments ({comments.length})</h2>
