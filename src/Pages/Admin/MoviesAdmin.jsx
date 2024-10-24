@@ -4,7 +4,7 @@ import MovieForm from "../../Components/movie/movieForm";
 import ConfirmDelete from "../../Components/movie/ConfirmDelete";
 
 export default function MoviesAdmin() {
-  const { movies, moviesLoading ,getMovies} = useMoviesAdmin();
+  const { movies, moviesLoading ,getMovies, createMovie} = useMoviesAdmin();
   const [shopop, setShopop] = useState(false);
   const [shopopdelete, setShopopdelete] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -88,7 +88,7 @@ export default function MoviesAdmin() {
      {shopop && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
    
-      <MovieForm movie={selectedMovie} showme={hidePopup} />
+      <MovieForm createMovie={createMovie} movie={selectedMovie} showme={hidePopup} />
    
   </div>
 )}
